@@ -1,0 +1,256 @@
+
+
+// This is to switch On or Off the MannequinDrivers. It is a quick way to drive any joint of the body 
+// with pre-existing drivers. They are based on the FreePosture drivers, 
+// so they are driving directly the joint angles and are really independent from each other. Also
+// all DOF can be driven separatly.
+// 0 switch the driver Off and 1 switch it On.
+// The input value for each driver is the joint angles and velocities defined below in the Mannequin folder.
+// Notice that even if it is possible to drive fully the model with those drivers, we originaly thinked them
+// as alternative or debug drivers.
+// *********************************************************************************************************
+
+// Those variable control the initial position of the body.
+// They are also the input values for the MannequinDrivers if switched On above.
+// ****************************************************************************
+
+
+AnyFolder Mannequin = {
+  
+  AnyFolder Posture = {
+    //This controls the position of the pelvi wrt. to the global reference frame
+    AnyVar PelvisPosX=0;
+    AnyVar PelvisPosY=1.0;
+    AnyVar PelvisPosZ=0;
+    
+    //This controls the rotation of the pelvis wrt. to the global reference frame
+    AnyVar PelvisRotX=90;
+    AnyVar PelvisRotY=0;
+    AnyVar PelvisRotZ=12;
+    
+    // These variables control the rotation of the thorax wrt the
+    // pelvis    
+    AnyVar PelvisThoraxExtension=-10; 
+    AnyVar PelvisThoraxLateralBending=-15;  
+    AnyVar PelvisThoraxRotation=-15;        
+    
+    AnyVar NeckExtension=10; 
+    AnyVar NeckLateralBending=30; 
+    AnyVar NeckRotation=-05; 
+    
+    AnyFolder Right = {
+      //Arm 
+      AnyVar SternoClavicularProtraction=-40;   //This value is not used for initial position
+      AnyVar SternoClavicularElevation=50;    //This value is not used for initial position
+      AnyVar SternoClavicularAxialRotation=-0; //This value is not used for initial position
+      
+      AnyVar GlenohumeralFlexion =20; 
+      AnyVar GlenohumeralAbduction = 165; 
+      AnyVar GlenohumeralExternalRotation = 90; 
+      
+      AnyVar ElbowFlexion = 145; 
+      AnyVar ElbowPronation = -90.0;
+      
+      AnyVar WristFlexion =93;
+      AnyVar WristAbduction =0;
+      
+      //Hand
+      AnyFolder Finger1 ={
+        AnyVar CMCDeviation=-20;
+        AnyVar CMCFlexion=-5;
+        AnyVar MCPFlexion= 5;
+        AnyVar MCPDeviation=5;
+        AnyVar DIPFlexion=50;
+      };
+      
+      AnyFolder Finger2 ={
+        AnyVar MCPFlexion=95;
+        AnyVar PIPFlexion=100;
+        AnyVar DIPFlexion=90;
+      };
+      
+      AnyFolder Finger3 ={
+        AnyVar MCPFlexion= .Finger2.MCPFlexion;
+        AnyVar PIPFlexion= .Finger2.PIPFlexion;
+        AnyVar DIPFlexion= .Finger2.DIPFlexion;
+      };
+      
+      AnyFolder Finger4 ={
+        AnyVar MCPFlexion= .Finger2.MCPFlexion;
+        AnyVar PIPFlexion= .Finger2.PIPFlexion;
+        AnyVar DIPFlexion= .Finger2.DIPFlexion;
+      };
+      
+      AnyFolder Finger5 ={
+        AnyVar MCPFlexion= .Finger2.MCPFlexion;
+        AnyVar PIPFlexion= .Finger2.PIPFlexion;
+        AnyVar DIPFlexion= .Finger2.DIPFlexion;
+      };
+      
+      //Leg
+      AnyVar HipFlexion = 30.0; 
+      AnyVar HipAbduction = 05.0; 
+      AnyVar HipExternalRotation = 10.0;
+      
+      AnyVar KneeFlexion = 60.0; 
+      
+      AnyVar AnklePlantarFlexion =0.0; 
+      AnyVar AnkleEversion =-10.0; 
+      
+      AnyVar SubTalarEversion = -15;
+    };
+    
+    AnyFolder Left = {
+      //all values are set to be equal to the right side values 
+      //feel free to change this!
+      
+      //Arm
+      AnyVar SternoClavicularProtraction=10;   //This value is not used for initial position
+      AnyVar SternoClavicularElevation=-15.5;    //This value is not used for initial position
+      AnyVar SternoClavicularAxialRotation=-20; //This value is not used for initial position
+      
+      AnyVar GlenohumeralFlexion =20; 
+      AnyVar GlenohumeralAbduction = -05; 
+      AnyVar GlenohumeralExternalRotation = -70; 
+
+      AnyVar ElbowFlexion = 135; 
+      AnyVar ElbowPronation = -10.0;
+      
+      AnyVar WristFlexion =00;
+      AnyVar WristAbduction =20;
+      
+      //Hand
+      AnyFolder Finger1 ={
+        AnyVar CMCDeviation=00;
+        AnyVar CMCFlexion=25;
+        AnyVar MCPFlexion= -10;
+        AnyVar MCPDeviation=0;
+        AnyVar DIPFlexion=-20;
+      };
+      
+      AnyFolder Finger2 ={
+        AnyVar MCPFlexion=90;
+        AnyVar PIPFlexion=90;
+        AnyVar DIPFlexion=50;
+      };
+      
+      AnyFolder Finger3 ={
+        AnyVar MCPFlexion=90;
+        AnyVar PIPFlexion=90;
+        AnyVar DIPFlexion=50;
+      };
+      
+      AnyFolder Finger4 ={
+        AnyVar MCPFlexion=90;
+        AnyVar PIPFlexion=90;
+        AnyVar DIPFlexion=50;
+      };
+      
+      AnyFolder Finger5 ={
+        AnyVar MCPFlexion=90;
+        AnyVar PIPFlexion=90;
+        AnyVar DIPFlexion=50;
+      };
+      
+      //Leg     
+      AnyVar HipFlexion = 50.0; 
+      AnyVar HipAbduction = 30.0; 
+      AnyVar HipExternalRotation = 45.0;
+      
+      AnyVar KneeFlexion = 120.0; 
+      
+      AnyVar AnklePlantarFlexion =-16.0; 
+      AnyVar AnkleEversion =0.0; 
+      
+      AnyVar SubTalarEversion = 0;
+    };
+  };
+  
+  
+  
+AnyFolder PostureVel={  
+      //This controls the position of the pelvi wrt. to the global reference frame
+    AnyVar PelvisPosX=0;
+    AnyVar PelvisPosY=0;
+    AnyVar PelvisPosZ=0;
+    
+    //This controls the rotation of the pelvis wrt. to the global reference frame
+    AnyVar PelvisRotX=0;
+    AnyVar PelvisRotY=0;
+    AnyVar PelvisRotZ=0;
+    
+    // These variables control the rotation of the thorax wrt the
+    // pelvis    
+    AnyVar PelvisThoraxExtension=0; 
+    AnyVar PelvisThoraxLateralBending=0;  
+    AnyVar PelvisThoraxRotation=0;        
+    
+    AnyVar NeckExtension=0; 
+    AnyVar NeckLateralBending=0; 
+    AnyVar NeckRotation=0; 
+    
+    AnyFolder Right = {
+      //Arm 
+      AnyVar SternoClavicularProtraction=0;   //This value is not used for initial position
+      AnyVar SternoClavicularElevation=0;    //This value is not used for initial position
+      AnyVar SternoClavicularAxialRotation=0; //This value is not used for initial position
+      
+      AnyVar GlenohumeralFlexion =0; 
+      AnyVar GlenohumeralAbduction = 0; 
+      AnyVar GlenohumeralExternalRotation = 0; 
+      
+      AnyVar ElbowFlexion = 0.0;
+      AnyVar ElbowPronation = 0.0;
+      
+      AnyVar WristFlexion =0;
+      AnyVar WristAbduction =0;
+      
+      AnyVar HipFlexion = 0.0; 
+      AnyVar HipAbduction = 0.0; 
+      AnyVar HipExternalRotation = 0.0;
+      
+      AnyVar KneeFlexion = 0.0; 
+      
+      AnyVar AnklePlantarFlexion =0.0; 
+      AnyVar AnkleEversion =0.0; 
+      
+      AnyVar SubTalarEversion = 0;
+    };
+    
+    AnyFolder Left = {
+      //all values are set to be equal to the right side values 
+      //feel free to change this!
+      
+      //Arm
+      AnyVar SternoClavicularProtraction=.Right.SternoClavicularProtraction;
+      AnyVar SternoClavicularElevation=.Right.SternoClavicularElevation;
+      AnyVar SternoClavicularAxialRotation=.Right.SternoClavicularAxialRotation;
+      
+      AnyVar GlenohumeralFlexion = .Right.GlenohumeralFlexion ; 
+      AnyVar GlenohumeralAbduction =.Right.GlenohumeralAbduction ;
+      AnyVar GlenohumeralExternalRotation =.Right.GlenohumeralExternalRotation ;
+
+      AnyVar ElbowFlexion = .Right.ElbowFlexion; 
+      AnyVar ElbowPronation = .Right.ElbowPronation;       
+      AnyVar WristFlexion =.Right.WristFlexion;
+      AnyVar WristAbduction =.Right.WristAbduction;
+      
+      
+      
+      //Leg     
+      AnyVar HipFlexion =.Right.HipFlexion;  
+      AnyVar HipAbduction =.Right.HipAbduction;
+      AnyVar HipExternalRotation = .Right.HipExternalRotation;
+      AnyVar KneeFlexion = .Right.KneeFlexion;       
+      AnyVar AnklePlantarFlexion = .Right.AnklePlantarFlexion ;
+      AnyVar AnkleEversion =.Right.AnkleEversion; 
+      
+      AnyVar SubTalarEversion = .Right.SubTalarEversion;
+    };
+  };
+
+  
+  
+};
+
+
